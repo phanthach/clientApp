@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
                     binding.errLogin.text = loginResult.message
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    println()
                     finish()
                 }
                 2->{
