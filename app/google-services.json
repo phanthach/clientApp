@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1018173243386",
+    "project_id": "qlvx-project",
+    "storage_bucket": "qlvx-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018173243386:android:ea78aab49de5827249ae43",
+        "android_client_info": {
+          "package_name": "com.example.clientapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXRu9zL-Dgwqfo3bmQaFqB9Af6Tz7mFUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
