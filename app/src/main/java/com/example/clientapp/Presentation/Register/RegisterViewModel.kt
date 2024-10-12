@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UI.Register
+package com.example.clientapp.Presentation.Register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

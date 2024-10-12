@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UI.Login
+package com.example.clientapp.Presentation.Login
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,8 +10,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.clientapp.Presentation.UI.Main.MainActivity
-import com.example.clientapp.Presentation.UI.Register.RegisterActivity
+import com.example.clientapp.Presentation.Main.MainActivity
+import com.example.clientapp.Presentation.Register.RegisterActivity
 import com.example.clientapp.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,18 +25,20 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btLogin.setOnClickListener {
-            binding.btLogin.isEnabled = false
-            val username = binding.userName.text.toString()
-            val password = binding.passWord.text.toString()
-            if(username.isEmpty()|| password.isEmpty()){
-                binding.errLogin.setTextColor(Color.RED)
-                binding.errLogin.visibility = View.VISIBLE
-                binding.errLogin.text = "Tài khoản và mật khẩu không được để trống"
-            }
-            else{
-                binding.progressBar.visibility = View.VISIBLE
-                loginViewModel.checklogin(username, password)
-            }
+//            binding.btLogin.isEnabled = false
+//            val username = binding.userName.text.toString()
+//            val password = binding.passWord.text.toString()
+//            if(username.isEmpty()|| password.isEmpty()){
+//                binding.errLogin.setTextColor(Color.RED)
+//                binding.errLogin.visibility = View.VISIBLE
+//                binding.errLogin.text = "Tài khoản và mật khẩu không được để trống"
+//            }
+//            else{
+//                binding.progressBar.visibility = View.VISIBLE
+//                loginViewModel.checklogin(username, password)
+//            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
         binding.txtRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -58,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
                     binding.errLogin.text = loginResult.message
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    println()
                     finish()
                 }
                 2->{

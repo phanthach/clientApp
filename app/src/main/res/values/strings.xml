@@ -2,4 +2,7 @@
     <string name="app_name">ClientApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rules">- Hành khách đi xe tự chủ động việc di chuyển tới địa điểm lên xe\n
+                         - Chủ động in vé hoặc lưu vé điện tử để sử dụng khi lên xe\n
+                         - Thủ tục hủy vé chỉ thực hiện khi yêu cầu được gửi trước giờ lên xe 2 tiếng\n</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UI.History
+package com.example.clientapp.Presentation.History
 
 import android.content.Intent
 import android.os.Bundle

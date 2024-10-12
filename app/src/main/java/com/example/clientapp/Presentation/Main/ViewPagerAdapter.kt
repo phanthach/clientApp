@@ -1,12 +1,12 @@
-package com.example.clientapp.Presentation.UI.Adapter
+package com.example.clientapp.Presentation.Main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.clientapp.Presentation.UI.Account.FragmentAccount
-import com.example.clientapp.Presentation.UI.History.FragmentHistory
-import com.example.clientapp.Presentation.UI.Home.FragmentHome
-import com.example.clientapp.Presentation.UI.ScanQR.FragmentScanQR
+import com.example.clientapp.Presentation.Account.FragmentAccount
+import com.example.clientapp.Presentation.History.FragmentHistory
+import com.example.clientapp.Presentation.Home.FragmentHome
+import com.example.clientapp.Presentation.ScanQR.FragmentScanQR
 
 class ViewPagerAdapter(fm: FragmentManager, behavior: Int): FragmentStatePagerAdapter(fm, behavior) {
     override fun getCount(): Int {

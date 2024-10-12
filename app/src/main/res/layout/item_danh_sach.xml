@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@drawable/radius"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         >
         <TextView
             android:id="@+id/date"
@@ -18,9 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="27/08/2024"
-            android:textStyle="bold"/>
-
+            android:text="08:00 27/08/2024"
+            android:textStyle="bold"
+            />
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="70dp"
@@ -32,6 +34,18 @@
             />
 
         <TextView
+            android:id="@+id/ten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView"
+            android:text="Nhà xe: "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/date"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_marginStart="20dp"
+            />
+        <TextView
             android:id="@+id/tenNhaxe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,19 +54,35 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_below="@+id/date"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_marginStart="20dp"
+            android:layout_toRightOf="@+id/ten"
             />
-
+        <TextView
+            android:id="@+id/vehicleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giường nằm"
+            android:textSize="18dp"
+            android:layout_marginStart="20dp"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_toRightOf="@+id/imageView"
+            />
         <TextView
             android:id="@+id/moTa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Xe giường nằm cao cấp"
-            android:textSize="15dp"
+            android:text="3"
+            android:textSize="18dp"
             android:layout_alignBottom="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/vehicleType"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:src="@drawable/star"
+            android:layout_toRightOf="@id/moTa"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_marginStart="5dp"
             />
 
     </RelativeLayout>
@@ -62,15 +92,49 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_below="@+id/cardView"
         />
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:backgroundTint="#E3DCDC"
+        android:background="@drawable/radius"
         app:cardCornerRadius="20dp"
         android:layout_below="@+id/duongke"
-        />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        >
+        <TextView
+            android:id="@+id/tt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Giá vé: "
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            />
+        <TextView
+            android:id="@+id/priceTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="200.000 VNĐ"
+            android:layout_toRightOf="@id/tt"
+            android:textStyle="bold"
+            android:textColor="#073CDF"
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Còn 40 chỗ"
+            android:layout_toRightOf="@id/priceTicket"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical|end"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
 </RelativeLayout>

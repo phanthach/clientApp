@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UI.Register
+package com.example.clientapp.Presentation.Register
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clientapp.Domain.Model.User
-import com.example.clientapp.Presentation.UI.Login.LoginActivity
+import com.example.clientapp.Presentation.Login.LoginActivity
 import com.example.clientapp.R
 import com.example.clientapp.databinding.ActivityRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
