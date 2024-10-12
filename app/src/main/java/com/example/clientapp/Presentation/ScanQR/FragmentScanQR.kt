@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UI.ScanQR
+package com.example.clientapp.Presentation.ScanQR
 
 import android.os.Bundle
 import android.view.LayoutInflater

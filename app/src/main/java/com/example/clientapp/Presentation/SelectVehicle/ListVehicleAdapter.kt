@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UI.Adapter
+package com.example.clientapp.Presentation.SelectVehicle
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.clientapp.R
 
 
-class DanhSachAdapter(private val mList: List<String>): RecyclerView.Adapter<DanhSachAdapter.ViewHolder>() {
+class ListVehicleAdapter(private val mList: List<String>): RecyclerView.Adapter<ListVehicleAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -18,7 +18,6 @@ class DanhSachAdapter(private val mList: List<String>): RecyclerView.Adapter<Dan
             textView = itemView.findViewById(R.id.tenNhaxe)
             mota = itemView.findViewById(R.id.moTa)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,5 +33,4 @@ class DanhSachAdapter(private val mList: List<String>): RecyclerView.Adapter<Dan
         val item = mList[position]
         holder.textView.text=item
     }
-
 }

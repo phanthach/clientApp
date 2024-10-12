@@ -1,10 +1,9 @@
-package com.example.clientapp.Presentation.UI.Main
+package com.example.clientapp.Presentation.Main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.clientapp.Presentation.UI.Adapter.ViewPagerAdapter
 import com.example.clientapp.R
 import com.example.clientapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint

@@ -117,6 +117,7 @@
                         android:layout_weight="7"
                         />
                     <Switch
+                        android:id="@+id/roundTrip"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Khứ hồi"
@@ -153,11 +154,12 @@
                         android:layout_below="@+id/tvTitle3"
                         android:hint="dd/MM/yyyy"
                         android:layout_weight="7"
+                        android:visibility="gone"
                         />
                 </LinearLayout>
             </RelativeLayout>
             <Button
-                android:id="@+id/btnTimKiem"
+                android:id="@+id/btnSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view2"
@@ -172,7 +174,7 @@
                 android:id="@+id/tt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnTimKiem"
+                android:layout_below="@id/btnSearch"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
