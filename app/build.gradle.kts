@@ -58,7 +58,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
     val nav_version = "2.7.7"
 
     // Jetpack Compose integration
@@ -99,7 +100,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 
     implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
-
+    implementation ("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
 }
 
 kapt {

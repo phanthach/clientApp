@@ -14,13 +14,59 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         >
+        <ImageView
+            android:id="@+id/imagePoints"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/points"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/timeStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/imagePoints"
+            android:text="HH:mm"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/dateStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="08:00 27/08/2024"
+            android:layout_toRightOf="@+id/timeStart"
+            android:text="dd/MM/yyyy"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:id="@+id/imagePlachor"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/placeholder"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/dateStart"
+            />
+        <TextView
+            android:id="@+id/timeEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/imagePlachor"
+            android:text="HH:mm"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/dateEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/timeEnd"
+            android:text="dd/MM/yyyy"
             android:textStyle="bold"
             />
         <ImageView
@@ -29,10 +75,9 @@
             android:layout_height="70dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/xekhach"
-            android:layout_below="@+id/date"
+            android:layout_below="@+id/timeStart"
             android:layout_marginTop="20dp"
             />
-
         <TextView
             android:id="@+id/ten"
             android:layout_width="wrap_content"
@@ -97,6 +142,7 @@
         android:layout_below="@+id/cardView"
         />
     <RelativeLayout
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/radius"

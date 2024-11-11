@@ -1,7 +1,13 @@
 package com.example.clientapp.DI
 
+import com.example.clientapp.Data.Network.ApiLayoutService
+import com.example.clientapp.Data.Network.ApiTripService
 import com.example.clientapp.Data.Network.ApiUserService
+import com.example.clientapp.Data.Repository.LayoutRepositoryImpl
+import com.example.clientapp.Data.Repository.TripRepositoryImpl
 import com.example.clientapp.Data.Repository.UserRepositoryImpl
+import com.example.clientapp.Domain.Repository.LayoutRepository
+import com.example.clientapp.Domain.Repository.TripRepository
 import com.example.clientapp.Domain.Repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -17,5 +23,17 @@ object RepositoryModule {
     @Singleton
     fun provideUserRepository(apiUserService: ApiUserService): UserRepository {
         return UserRepositoryImpl(apiUserService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTripReposiory(apiTripService: ApiTripService): TripRepository {
+        return TripRepositoryImpl(apiTripService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLayoutRepository(apiLayoutService: ApiLayoutService): LayoutRepository {
+        return LayoutRepositoryImpl(apiLayoutService)
     }
 }

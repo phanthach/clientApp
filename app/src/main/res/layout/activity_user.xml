@@ -6,12 +6,13 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu_bottom_navigation"
         app:itemTextColor="@color/cus_color_bottom_navigation"
         app:itemIconTint="@color/cus_color_bottom_navigation"
         app:labelVisibilityMode="labeled"
+        android:background="@color/white"
         />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
