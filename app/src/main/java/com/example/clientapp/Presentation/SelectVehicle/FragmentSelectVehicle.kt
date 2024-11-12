@@ -79,7 +79,6 @@ class FragmentSelectVehicle: Fragment(), ItemListener {
                     if((visibleItemCount + firstVisibleItemPosition) >= totalItemCount){
                         if(page<totalPage-1){
                             page++
-                            Toast.makeText(requireContext(), "Total Pages: $page", Toast.LENGTH_SHORT).show()
                             binding.progressBar.visibility = View.VISIBLE
                             fragmentSelectVehicleViewModel.getTrips(page,pickUpPoint!!, dropOffPoint!!, departureDate!!)
                         }

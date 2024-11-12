@@ -4,11 +4,40 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     >
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#286aa3"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/btBack"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvSelect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="Chọn chuyến đi"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSeat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/filter"
+        android:layout_below="@+id/actionBar"
         />
     <RelativeLayout
         android:id="@+id/filter"
@@ -23,7 +52,7 @@
             android:text="Số lượng: "
             android:textSize="20dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:textStyle="bold"
             />
@@ -32,11 +61,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvSeat"
-            android:text="2"
             android:textSize="20dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vị trí: "
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvTotalSeat"
+            />
+        <TextView
+            android:id="@+id/tvNameSeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvSeat"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvTotalSeat"
             />
         <TextView
             android:id="@+id/tvPrice"
@@ -45,10 +96,10 @@
             android:text="Tông tiền: "
             android:textSize="20dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:textStyle="bold"
-            android:layout_below="@+id/tvSeat"
+            android:layout_below="@+id/tvName"
             android:layout_marginBottom="20dp"
             />
         <TextView
@@ -56,21 +107,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvPrice"
-            android:layout_below="@+id/tvSeat"
-            android:text="400.000 VNĐ"
+            android:layout_below="@+id/tvName"
             android:textSize="20dp"
             android:textColor="#3442BD"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
             />
         <Button
+            android:id="@+id/btnContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_green_border"
             android:layout_below="@id/tvPrice"
             android:layout_centerHorizontal="true"
             android:text="Tiếp tục"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             />
     </RelativeLayout>
 </RelativeLayout>
