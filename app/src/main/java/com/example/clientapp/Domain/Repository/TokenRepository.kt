@@ -4,4 +4,5 @@ interface TokenRepository {
     fun saveToken(token: String, remember: Boolean)
     fun getToken(): String?
     fun deleteToken()
+    fun getTokenValid():String?
 }

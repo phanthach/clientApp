@@ -5,6 +5,7 @@ import com.example.clientapp.Domain.Model.Request.LoginRequest
 import com.example.clientapp.Domain.Model.Response.LoginResponse
 import com.example.clientapp.Domain.Model.Response.RegisterResponse
 import com.example.clientapp.Domain.Model.Model.User
+import com.example.clientapp.Domain.Model.Response.TokenRespose
 import com.example.clientapp.Domain.Repository.UserRepository
 import javax.inject.Inject
 
@@ -23,6 +24,15 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiUserServ
         } catch (e: Exception) {
             e.printStackTrace()
             LoginResponse("An error occurred", 0, null, null)
+        }
+    }
+
+    override suspend fun validateUser(token: String): TokenRespose {
+        return try {
+            apiService.validateUser(token).body()!!
+        } catch (e: Exception) {
+            e.printStackTrace()
+            TokenRespose(0, "Error", "Error", null)
         }
     }
 }

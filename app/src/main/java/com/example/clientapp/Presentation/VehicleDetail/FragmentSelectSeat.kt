@@ -3,10 +3,12 @@ package com.example.clientapp.Presentation.VehicleDetail
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clientapp.Domain.Repository.ItemSelectSeat
 import com.example.clientapp.Presentation.BookTicket.BookTicketActivityViewModel
 import com.example.clientapp.Presentation.Login.LoginActivity
+import com.example.clientapp.Presentation.SelectVehicle.FragmentSelectVehicleReturnTrip
+import com.example.clientapp.R
 import com.example.clientapp.databinding.FragmentSelectSeatBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentSelectSeat: Fragment(), ItemSelectSeat {
     private var _binding: FragmentSelectSeatBinding? = null
     private val bookTicketActivityViewModel: BookTicketActivityViewModel by activityViewModels()
-    private val fragmentSelectSeatViewModel: FragmentSelectSeatViewModel by activityViewModels()
+    private val fragmentSelectSeatViewModel: FragmentSelectSeatViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var adapter: SelectSeatRecycleViewAdapter
 
@@ -70,19 +74,37 @@ class FragmentSelectSeat: Fragment(), ItemSelectSeat {
 
     private fun setUpInfo() {
         binding.btBack.setOnClickListener {
+            bookTicketActivityViewModel.removeAll()
             requireActivity().onBackPressed()
         }
         binding.btnContinue.setOnClickListener{
-
+            //Add fragment FragmentSelectVehicleReturnTrip
+            var size =0
+            fragmentSelectSeatViewModel.listNameSeat.observe(viewLifecycleOwner, {
+                size = it.size
+            })
+            if (size>0){
+                val fragment = FragmentSelectLocation()
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                transaction.add(R.id.fragment, fragment)
+                transaction.addToBackStack(null)
+                transaction.hide(this)
+                transaction.commit()
+            }
+            else{
+                Toast.makeText(requireContext(), "Vui lòng chọn ghế", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     override fun onItemSelect(isSelect: Boolean, nameSeat: String, seatId: Int, position: Int) {
         if (isSelect){
             fragmentSelectSeatViewModel.updateListNameSeat(seatId, nameSeat)
+            bookTicketActivityViewModel.updateListNameSeat(seatId, nameSeat)
         }
         else{
             fragmentSelectSeatViewModel.removeListNameSeat(seatId, nameSeat)
+            bookTicketActivityViewModel.removeListNameSeat(seatId, nameSeat)
         }
         fragmentSelectSeatViewModel.listNameSeat.observe(viewLifecycleOwner, {listNameSeat ->
             binding.tvTotalSeat.text = listNameSeat.size.toString()
@@ -92,5 +114,14 @@ class FragmentSelectSeat: Fragment(), ItemSelectSeat {
             })
         })
     }
+    override fun onResume() {
+        super.onResume()
+        Log.d("FragmentSelectVehicle", "onResume: ")
+    }
 
+    override fun onPause() {
+        super.onPause()
+        bookTicketActivityViewModel.removeAll()
+        Log.d("FragmentSelectVehicle", "onPause: ")
+    }
 }

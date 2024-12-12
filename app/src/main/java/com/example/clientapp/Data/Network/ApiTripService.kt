@@ -1,5 +1,6 @@
 package com.example.clientapp.Data.Network
 
+import com.example.clientapp.Domain.Model.Response.LocationListResponse
 import com.example.clientapp.Domain.Model.Response.TripResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,4 +15,7 @@ interface ApiTripService {
                            @Query("startLocation") startLocation: String,
                            @Query("endLocation") endLocation: String,
                            @Query("departureDate") departureDate: String): Response<TripResponse>
+    @GET("api/listlocations")
+    suspend fun listLocations(@Header("Authorization") token: String,
+                                @Query("routeId") routeId: Int): Response<LocationListResponse>
 }

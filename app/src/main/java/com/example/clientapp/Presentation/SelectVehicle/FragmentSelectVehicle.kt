@@ -62,12 +62,20 @@ class FragmentSelectVehicle: Fragment(), ItemListener {
         fragmentHomeViewModel.setDepartureDate(departureDate ?: "")
         fragmentHomeViewModel.setReturnDate(returnDate ?: "")
         fragmentHomeViewModel.setRoundTrip(roundTrip)
+
+        bookTicketActivityViewModel.setPickOffPoint(pickUpPoint ?: "")
+        bookTicketActivityViewModel.setDropOffPoint(dropOffPoint ?: "")
+        bookTicketActivityViewModel.setDepartureDate(departureDate ?: "")
+        bookTicketActivityViewModel.setReturnDate(returnDate ?: "")
+        bookTicketActivityViewModel.setRoundTrip(roundTrip)
+
         setUpInfo()
         setContinueButton(roundTrip)
         getListTrips(page,pickUpPoint,dropOffPoint,departureDate)
         Log.d("FragmentSelectVehicle", "onViewCreated: ")
         checkListTrips(pickUpPoint,dropOffPoint,departureDate)
     }
+
     private fun checkListTrips(pickUpPoint: String?, dropOffPoint: String?, departureDate: String?) {
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -108,6 +116,7 @@ class FragmentSelectVehicle: Fragment(), ItemListener {
                 bookTicketActivityViewModel.getTrips(tripVehecle.get(tripSelect!!))
                 transaction.add(R.id.fragment, fragment)
                 transaction.addToBackStack(null)
+                transaction.hide(this)
                 transaction.commit()
             }
             else {
@@ -162,18 +171,4 @@ class FragmentSelectVehicle: Fragment(), ItemListener {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("FragmentSelectVehicle", "onPause: ")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("FragmentSelectVehicle", "onDestroyView: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("FragmentSelectVehicle", "onDestroy: ")
-    }
 }

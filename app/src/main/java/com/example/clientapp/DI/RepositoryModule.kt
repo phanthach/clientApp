@@ -1,11 +1,14 @@
 package com.example.clientapp.DI
 
+import com.example.clientapp.Data.Network.ApiGoongMapService
 import com.example.clientapp.Data.Network.ApiLayoutService
 import com.example.clientapp.Data.Network.ApiTripService
 import com.example.clientapp.Data.Network.ApiUserService
+import com.example.clientapp.Data.Repository.GoongMapRepositoryImpl
 import com.example.clientapp.Data.Repository.LayoutRepositoryImpl
 import com.example.clientapp.Data.Repository.TripRepositoryImpl
 import com.example.clientapp.Data.Repository.UserRepositoryImpl
+import com.example.clientapp.Domain.Repository.GoongMapRepository
 import com.example.clientapp.Domain.Repository.LayoutRepository
 import com.example.clientapp.Domain.Repository.TripRepository
 import com.example.clientapp.Domain.Repository.UserRepository
@@ -35,5 +38,11 @@ object RepositoryModule {
     @Singleton
     fun provideLayoutRepository(apiLayoutService: ApiLayoutService): LayoutRepository {
         return LayoutRepositoryImpl(apiLayoutService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGoongMapRepository(apiGoongMapService: ApiGoongMapService): GoongMapRepository {
+        return GoongMapRepositoryImpl(apiGoongMapService)
     }
 }

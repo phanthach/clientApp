@@ -2,6 +2,7 @@ package com.example.clientapp.Data.Repository
 
 import android.util.Log
 import com.example.clientapp.Data.Network.ApiTripService
+import com.example.clientapp.Domain.Model.Response.LocationListResponse
 import com.example.clientapp.Domain.Model.Response.TripResponse
 import com.example.clientapp.Domain.Repository.TripRepository
 import jakarta.inject.Inject
@@ -20,6 +21,14 @@ class TripRepositoryImpl @Inject constructor(private val apiService: ApiTripServ
         } catch (e: Exception) {
             e.printStackTrace()
             TripResponse(emptyList(), 0)
+        }
+    }
+    override suspend fun getLocations(token: String, routeId: Int): LocationListResponse {
+        return try {
+            apiService.listLocations(token, routeId).body()!!
+        } catch (e: Exception) {
+            e.printStackTrace()
+            LocationListResponse(403, "error", emptyList())
         }
     }
 }

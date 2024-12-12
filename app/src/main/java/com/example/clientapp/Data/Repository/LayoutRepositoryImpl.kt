@@ -1,5 +1,6 @@
 package com.example.clientapp.Data.Repository
 
+import android.util.Log
 import com.example.clientapp.Data.Network.ApiLayoutService
 import com.example.clientapp.Domain.Model.Model.LayoutSeat
 import com.example.clientapp.Domain.Repository.LayoutRepository

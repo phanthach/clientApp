@@ -28,6 +28,7 @@ class FragmentSelectSeatViewModel @Inject constructor(private val getLayoutUseCa
 
     private var listNameSeatBackUp : MutableList<String> = mutableListOf()
     private var listSeatIdBackUp : MutableList<Int> = mutableListOf()
+
     fun getLayout(layoutId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

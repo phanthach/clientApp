@@ -5,6 +5,11 @@
     <string name="rules">- Hành khách đi xe tự chủ động việc di chuyển tới địa điểm lên xe\n
                          - Chủ động in vé hoặc lưu vé điện tử để sử dụng khi lên xe\n
                          - Thủ tục hủy vé chỉ thực hiện khi yêu cầu được gửi trước giờ lên xe 2 tiếng\n</string>
+    <string-array name="fillter">
+        <item>Tất cả</item>
+        <item>Chờ thanh toán</item>
+        <item>Đã thanh toán</item>
+    </string-array>
     <!-- Khai báo mảng chuỗi chứa các tỉnh thành -->
     <string-array name="provinces">
         <item>An Giang</item>
@@ -72,4 +77,5 @@
         <item>Yên Bái</item>
     </string-array>
     <string name="underlined_text"><u>Thay đổi</u></string>
+    <string name="choose"><u>Chọn</u></string>
 </resources>
