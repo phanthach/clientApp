@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clientapp.Domain.Model.Response.RegisterResponse
-import com.example.clientapp.Domain.Model.User
+import com.example.clientapp.Domain.Model.Model.User
 import com.example.clientapp.Domain.Repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(
+class RegisterUserViewModel @Inject constructor(
     private val userRepository: UserRepository
 ):ViewModel() {
     private val _registerResponse = MutableLiveData<RegisterResponse>()

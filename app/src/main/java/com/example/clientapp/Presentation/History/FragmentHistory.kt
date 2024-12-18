@@ -6,21 +6,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.clientapp.Presentation.UserActivity.ViewPagerAdapter
 import com.example.clientapp.R
 import com.example.clientapp.Service.MyForegroundService
+import com.example.clientapp.databinding.FragmentHistoryBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class FragmentHistory: Fragment() {
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+    ): View {
+        _binding = FragmentHistoryBinding.inflate(layoutInflater)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val intent = Intent(context, MyForegroundService::class.java)
-        context?.stopService(intent)
+        setUpTabLayoutAndViewPager()
+    }
+    private fun setUpTabLayoutAndViewPager() {
+        val tabPagerAdapter = TabPagerAdapter(requireActivity())
+        binding.viewPager.adapter = tabPagerAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Chờ thanh toán"
+                1 -> "Đã thanh toán"
+                2 -> "Đã hủy"
+                else -> "Hiện tại"
+            }
+        }.attach()
     }
 }

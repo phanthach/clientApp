@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.Main
+package com.example.clientapp.Presentation.UserActivity
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

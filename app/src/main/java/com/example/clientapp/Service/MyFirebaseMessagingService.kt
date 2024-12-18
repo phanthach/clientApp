@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.example.clientapp.Presentation.Main.MainActivity
+import com.example.clientapp.Presentation.UserActivity.UserActivity
 import com.example.clientapp.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -45,7 +45,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         // Tạo một Intent để mở ứng dụng khi người dùng nhấn vào thông báo
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, UserActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 

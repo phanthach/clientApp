@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
 }
 
 android {
@@ -54,13 +53,15 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.inappmessaging.display)
     implementation(libs.firebase.database)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.mapbox.maps:android:11.8.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
     val nav_version = "2.7.7"
-
     // Jetpack Compose integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
@@ -99,6 +100,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 
     implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
+    implementation ("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+
 
 }
 

@@ -4,13 +4,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.UI.Login.Login">
+    tools:context=".Presentation.Login.LoginActivity"
+    android:background="@drawable/backgroundlogin"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
         >
         <ImageView
             android:layout_width="150dp"
@@ -22,26 +25,75 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Xin chào quý khách"
             android:gravity="center"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:textColor="@color/orange"
+            android:textColor="#FFFFFF"
             />
-        <EditText
-            android:id="@+id/userName"
+        <LinearLayout
+            android:id="@+id/inputUser"
+            android:layout_marginTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="10"
+            android:background="@drawable/boder_edittex"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/user"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                />
+            <EditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Username"
+                android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inputPassword"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Username"
-            />
-        <EditText
-            android:id="@+id/passWord"
+            android:weightSum="10"
+            android:background="@drawable/boder_edittex"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/password"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                />
+            <EditText
+                android:id="@+id/passWord"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Password"
+                android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                />
+        </LinearLayout>
+        <CheckBox
+            android:id="@+id/remember"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:text="Ghi nhớ đăng nhập"
             android:layout_marginTop="20dp"
-            android:hint="Password"
-            android:inputType="textPassword"
+            android:textSize="20dp"
+            android:textColor="#52cbbe"
             />
         <TextView
             android:id="@+id/errLogin"
@@ -53,14 +105,14 @@
             />
         <Button
             android:id="@+id/btLogin"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:text="Login"
-            android:backgroundTint="@color/blue"
+            android:text="Đăng nhập"
+            android:background="@drawable/button_green_border"
+            android:textColor="@color/white"
             />
-
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -76,23 +128,34 @@
             android:gravity="center"
             android:visibility="gone"
             />
+        <TextView
+            android:id="@+id/txtForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quên mật khẩu?"
+            android:layout_marginTop="30dp"
+            android:textColor="#52cbbe"
+            android:textSize="20dp"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bạn chưa có tài khoản? "
+                android:textColor="@color/black"
+                android:textSize="20dp"
                 />
             <TextView
                 android:id="@+id/txtRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đăng ký"
-                android:textColor="@color/blue"
-
+                android:textColor="#52cbbe"
+                android:textSize="20dp"
                 />
         </LinearLayout>
     </LinearLayout>

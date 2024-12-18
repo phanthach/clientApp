@@ -1,4 +1,4 @@
-package com.example.clientapp.Domain.Model
+package com.example.clientapp.Domain.Model.Model
 
 data class User(
     val userId: Int? = null,

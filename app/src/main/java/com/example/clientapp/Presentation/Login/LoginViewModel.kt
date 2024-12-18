@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.Login
+package com.example.clientapp.Presentation.UI.Login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +8,7 @@ import com.example.clientapp.Data.Network.ApiUserService
 import com.example.clientapp.Domain.Model.Request.LoginRequest
 import com.example.clientapp.Domain.Model.Response.LoginResponse
 import com.example.clientapp.Domain.Repository.UserRepository
+import com.example.clientapp.Domain.UseCase.LoginUseCase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val loginUseCase: LoginUseCase,
 ): ViewModel() {
     private val _loginResult = MutableLiveData<LoginResponse>();
     val loginResult: LiveData<LoginResponse> = _loginResult;
@@ -28,18 +29,22 @@ class LoginViewModel @Inject constructor(
     fun checklogin(phoneNumber: String, password: String){
         viewModelScope.launch(Dispatchers.IO){
             try {
-                val loginRequest = LoginRequest(phoneNumber, password)
-                val response = userRepository.loginUser(loginRequest)
+                val response = loginUseCase.checkLogin(phoneNumber, password)
                 withContext(Dispatchers.Main){
                     _loginResult.value = response
                 }
             }catch (e: Exception){
                 e.printStackTrace()
                 withContext(Dispatchers.Main){
-                    _loginResult.value = LoginResponse("An error occurred", 0)
+                    _loginResult.value = LoginResponse("An error", 0,null,null)
                 }
             }
         }
-
+    }
+    fun deleteToken(){
+        loginUseCase.deleteToken()
+    }
+    fun saveToken(token: String, isRemember: Boolean){
+        loginUseCase.saveToken(token, isRemember)
     }
 }
