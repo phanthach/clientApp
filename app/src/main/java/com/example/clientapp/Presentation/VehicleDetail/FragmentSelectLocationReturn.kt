@@ -1,6 +1,7 @@
 package com.example.clientapp.Presentation.VehicleDetail
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -84,15 +86,20 @@ class FragmentSelectLocationReturn: Fragment(), ItemListener {
         binding.rvPick.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         // set styleUri to null method
         mapView?.getMapboxMap()?.loadStyleUri("https://tiles.goong.io/assets/goong_map_web.json?api_key=eFpkDf32mSR7Ik1kK7tZt3TpQMY5IepOaAETGuT1")
-        bookTicketActivityViewModel.trips.observe(viewLifecycleOwner, {
+        bookTicketActivityViewModel.tripsReturn.observe(viewLifecycleOwner, {
             fragmentSelectLocationViewModel.getLocations(it.trip.routeId)
         })
         if(setroute==1){
             binding.pickUp.setBackgroundResource(R.drawable.boder_edittex_err)
         }
         binding.btnContinue.setOnClickListener{
-            val intent = Intent(requireContext(), PayActivity::class.java)
-            startActivity(intent)
+            //Add fragment FragmentPay
+            val fragment = FragmentPay()
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.add(R.id.fragment, fragment)
+            transaction.addToBackStack(null)
+            transaction.hide(this)
+            transaction.commit()
         }
         setUpSearch()
         setUpLocation()
@@ -295,6 +302,8 @@ class FragmentSelectLocationReturn: Fragment(), ItemListener {
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, suggestions.predictions.map { it.description })
             binding.actvSearch.setAdapter(adapter)
             binding.actvSearch.setOnItemClickListener { _, _, position, _ ->
+                val imm = view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(view?.windowToken, 0)
                 place_id = suggestions.predictions[position].place_id
                 if(setroute==1){
                     fragmentSelectLocationViewModel.getPlaceDetailPickUp(place_id)
@@ -315,7 +324,8 @@ class FragmentSelectLocationReturn: Fragment(), ItemListener {
 
     override fun onItemClick(position: Int) {
         if(setroute==1){
-            fragmentSelectLocationViewModel.setPickupLocation(listLocationPickUp[position].location.nameLocation!!)
+            fragmentSelectLocationViewModel.setPickupLocation(listLocationPickUp[position].location.nameLocation!!, listLocationPickUp[position].location.locationId!!)
+            bookTicketActivityViewModel.updateLocationPickUpTripReturn(listLocationPickUp[position].location.locationId!!,listLocationPickUp[position].location.nameLocation!!)
             fragmentSelectLocationViewModel.pickupLocation.observe(viewLifecycleOwner, {
                 binding.pickUpLocation.text = it
                 binding.pickUp.setBackgroundResource(R.drawable.boder_edittex)
@@ -327,7 +337,8 @@ class FragmentSelectLocationReturn: Fragment(), ItemListener {
             adapter.SelectedPosition(null)
         }
         else{
-            fragmentSelectLocationViewModel.setDropoffLocation(listLocationDropOff[position].location.nameLocation!!)
+            fragmentSelectLocationViewModel.setDropoffLocation(listLocationDropOff[position].location.nameLocation!!, listLocationDropOff[position].location.locationId!!)
+            bookTicketActivityViewModel.updateLocationDropOffTripReturn(listLocationDropOff[position].location.locationId!!,listLocationDropOff[position].location.nameLocation!!)
             fragmentSelectLocationViewModel.dropoffLocation.observe(viewLifecycleOwner, {
                 binding.dropOffLocation.text = it
                 binding.dropOff.setBackgroundResource(R.drawable.boder_edittex)

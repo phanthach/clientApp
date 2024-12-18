@@ -35,8 +35,8 @@ class FragmentHistory: Fragment() {
         binding.viewPager.adapter = tabPagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Hiện tại"
-                1 -> "Hoàn thành"
+                0 -> "Chờ thanh toán"
+                1 -> "Đã thanh toán"
                 2 -> "Đã hủy"
                 else -> "Hiện tại"
             }

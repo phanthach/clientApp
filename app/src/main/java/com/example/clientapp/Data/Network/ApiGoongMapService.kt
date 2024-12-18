@@ -13,16 +13,17 @@ interface ApiGoongMapService {
 //    bzX0L7RV0SW6Q9FVAYzrCiwzOYzErRh1hNZ4PqU4
 //    V5ijRnWBS3k5rUHKREi3wqZzdi0jHiadYa1ZmLpP
 
-    @GET("Place/AutoComplete?api_key=V5ijRnWBS3k5rUHKREi3wqZzdi0jHiadYa1ZmLpP")
+    @GET("Place/AutoComplete?api_key=bzX0L7RV0SW6Q9FVAYzrCiwzOYzErRh1hNZ4PqU4")
     suspend fun getPlaceAutoComplete(@Query("input") input: String?): PlaceAutoCompleteResponse
-    @GET("Place/Detail?api_key=V5ijRnWBS3k5rUHKREi3wqZzdi0jHiadYa1ZmLpP")
+
+    @GET("Place/Detail?api_key=bzX0L7RV0SW6Q9FVAYzrCiwzOYzErRh1hNZ4PqU4")
     suspend fun getPlaceDetail(@Query("place_id") place_id: String?): LocationResponse
 
-    @GET("distancematrix?api_key=V5ijRnWBS3k5rUHKREi3wqZzdi0jHiadYa1ZmLpP")
+    @GET("distancematrix?api_key=bzX0L7RV0SW6Q9FVAYzrCiwzOYzErRh1hNZ4PqU4")
     suspend fun getDistanceMatrix(@Query("origins") origins: String?,
                                   @Query("destinations") destinations: String?,
                                     @Query("vehicle") vehicle:String) : DistanceMatrixResponse
-    @GET("direction?api_key=V5ijRnWBS3k5rUHKREi3wqZzdi0jHiadYa1ZmLpP")
+    @GET("direction?api_key=bzX0L7RV0SW6Q9FVAYzrCiwzOYzErRh1hNZ4PqU4")
     suspend fun getDirection(@Query("origin") origin: String?,
                              @Query("destination") destination: String?,
                              @Query("vehicle") vehicle:String): RouteLine

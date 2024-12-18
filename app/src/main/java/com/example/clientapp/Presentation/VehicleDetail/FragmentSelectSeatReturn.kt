@@ -44,12 +44,13 @@ class FragmentSelectSeatReturn: Fragment(), ItemSelectSeat {
         adapter = SelectSeatRecycleViewAdapter(null, this)
         binding.rvSeat.adapter = adapter
         binding.rvSeat.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.tvSelect.text = "Chọn chiều về"
         setUpInfo()
         getListSeat()
     }
 
     private fun getListSeat() {
-        bookTicketActivityViewModel.trips.observe(viewLifecycleOwner, {
+        bookTicketActivityViewModel.tripsReturn.observe(viewLifecycleOwner, {
             fragmentSelectSeatViewModel.getLayout(it.vehicle.layoutId)
             fragmentSelectSeatViewModel.updatePriceSeat(it.trip.ticketPrice)
         })
@@ -74,7 +75,7 @@ class FragmentSelectSeatReturn: Fragment(), ItemSelectSeat {
 
     private fun setUpInfo() {
         binding.btBack.setOnClickListener {
-            bookTicketActivityViewModel.removeAll()
+            bookTicketActivityViewModel.removeAllReturn()
             requireActivity().onBackPressed()
         }
         binding.btnContinue.setOnClickListener{
@@ -84,7 +85,7 @@ class FragmentSelectSeatReturn: Fragment(), ItemSelectSeat {
                 size = it.size
             })
             if (size>0){
-                val fragment = FragmentSelectLocation()
+                val fragment = FragmentSelectLocationReturn()
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 transaction.add(R.id.fragment, fragment)
                 transaction.addToBackStack(null)
@@ -100,11 +101,11 @@ class FragmentSelectSeatReturn: Fragment(), ItemSelectSeat {
     override fun onItemSelect(isSelect: Boolean, nameSeat: String, seatId: Int, position: Int) {
         if (isSelect){
             fragmentSelectSeatViewModel.updateListNameSeat(seatId, nameSeat)
-            bookTicketActivityViewModel.updateListNameSeat(seatId, nameSeat)
+            bookTicketActivityViewModel.updateListNameSeatReturn(seatId, nameSeat)
         }
         else{
             fragmentSelectSeatViewModel.removeListNameSeat(seatId, nameSeat)
-            bookTicketActivityViewModel.removeListNameSeat(seatId, nameSeat)
+            bookTicketActivityViewModel.removeListNameSeatReturn(seatId, nameSeat)
         }
         fragmentSelectSeatViewModel.listNameSeat.observe(viewLifecycleOwner, {listNameSeat ->
             binding.tvTotalSeat.text = listNameSeat.size.toString()
@@ -121,7 +122,7 @@ class FragmentSelectSeatReturn: Fragment(), ItemSelectSeat {
 
     override fun onPause() {
         super.onPause()
-        bookTicketActivityViewModel.removeAll()
+        bookTicketActivityViewModel.removeAllReturn()
         Log.d("FragmentSelectVehicle", "onPause: ")
     }
 }

@@ -50,6 +50,12 @@ class FragmentSelectLocationViewModel @Inject constructor(
     private var _dropoffLocation = MutableLiveData<String>()
     val dropoffLocation: LiveData<String> = _dropoffLocation
 
+    private var _pickupLocationId = MutableLiveData<Int>()
+    val pickupLocationId: LiveData<Int> = _pickupLocationId
+
+    private var _dropoffLocationId = MutableLiveData<Int>()
+    val dropoffLocationId: LiveData<Int> = _dropoffLocationId
+
     fun getPlaceAutoComplete(input: String?) {
         try {
             viewModelScope.launch(Dispatchers.IO){
@@ -138,10 +144,12 @@ class FragmentSelectLocationViewModel @Inject constructor(
             e.printStackTrace()
         }
     }
-    fun setPickupLocation(location: String){
+    fun setPickupLocation(location: String, id: Int){
         _pickupLocation.value = location
+        _pickupLocationId.value = id
     }
-    fun setDropoffLocation(location: String){
+    fun setDropoffLocation(location: String, id: Int){
         _dropoffLocation.value = location
+        _dropoffLocationId.value = id
     }
 }

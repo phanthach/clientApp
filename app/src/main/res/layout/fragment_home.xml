@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
         <RelativeLayout
             android:id="@+id/view1"
             android:layout_width="match_parent"
@@ -226,11 +227,37 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/button_green_border"
                 />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/txtNoti"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@id/btnSearch"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#B2C7C4"
+                android:visibility="gone"
+                >
+                <TextView
+                    android:id="@+id/tvNoti"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:text="Hello"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#D16D6D"
+                    />
+            </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/tt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnSearch"
+                android:layout_below="@id/txtNoti"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"

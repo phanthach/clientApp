@@ -1,6 +1,7 @@
 package com.example.clientapp.Presentation.VehicleDetail
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -25,6 +27,7 @@ import com.example.clientapp.Domain.Repository.ItemListener
 import com.example.clientapp.Presentation.BookTicket.BookTicketActivityViewModel
 import com.example.clientapp.Presentation.Login.LoginActivity
 import com.example.clientapp.Presentation.Pay.PayActivity
+import com.example.clientapp.Presentation.SelectVehicle.FragmentSelectVehicleReturnTrip
 import com.example.clientapp.R
 import com.example.clientapp.databinding.FragmentSelectLocationBinding
 import com.mapbox.geojson.Feature
@@ -90,10 +93,30 @@ class FragmentSelectLocation: Fragment(), ItemListener {
         if(setroute==1){
             binding.pickUp.setBackgroundResource(R.drawable.boder_edittex_err)
         }
-        binding.btnContinue.setOnClickListener{
-            val intent = Intent(requireContext(), PayActivity::class.java)
-            startActivity(intent)
-        }
+        bookTicketActivityViewModel.roundTrip.observe(viewLifecycleOwner, { roundTrip ->
+            binding.btnContinue.setOnClickListener {
+                if(!roundTrip){
+                    //Add fragment FragmentSelectVehicleReturnTrip
+                    val fragment = FragmentPay()
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.fragment, fragment)
+                    transaction.addToBackStack(null)
+                    transaction.hide(this)
+                    transaction.commit()
+//                    val intent = Intent(requireContext(), PayActivity::class.java)
+//                    startActivity(intent)
+                }
+                else {
+                    //Add fragment FragmentSelectSeatReturn
+                    val fragment = FragmentSelectSeatReturn()
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.fragment, fragment)
+                    transaction.addToBackStack(null)
+                    transaction.hide(this)
+                    transaction.commit()
+                }
+            }
+        })
         setUpSearch()
         setUpLocation()
         setUpPick()
@@ -295,6 +318,8 @@ class FragmentSelectLocation: Fragment(), ItemListener {
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, suggestions.predictions.map { it.description })
             binding.actvSearch.setAdapter(adapter)
             binding.actvSearch.setOnItemClickListener { _, _, position, _ ->
+                val imm = view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(view?.windowToken, 0)
                 place_id = suggestions.predictions[position].place_id
                 if(setroute==1){
                     fragmentSelectLocationViewModel.getPlaceDetailPickUp(place_id)
@@ -315,7 +340,8 @@ class FragmentSelectLocation: Fragment(), ItemListener {
 
     override fun onItemClick(position: Int) {
         if(setroute==1){
-            fragmentSelectLocationViewModel.setPickupLocation(listLocationPickUp[position].location.nameLocation!!)
+            fragmentSelectLocationViewModel.setPickupLocation(listLocationPickUp[position].location.nameLocation!!, listLocationPickUp[position].location.locationId!!)
+            bookTicketActivityViewModel.updateLocationPickUpTrip(listLocationPickUp[position].location.locationId!!, listLocationPickUp[position].location.nameLocation!!)
             fragmentSelectLocationViewModel.pickupLocation.observe(viewLifecycleOwner, {
                 binding.pickUpLocation.text = it
                 binding.pickUp.setBackgroundResource(R.drawable.boder_edittex)
@@ -327,7 +353,8 @@ class FragmentSelectLocation: Fragment(), ItemListener {
             adapter.SelectedPosition(null)
         }
         else{
-            fragmentSelectLocationViewModel.setDropoffLocation(listLocationDropOff[position].location.nameLocation!!)
+            fragmentSelectLocationViewModel.setDropoffLocation(listLocationDropOff[position].location.nameLocation!!, listLocationDropOff[position].location.locationId!!)
+            bookTicketActivityViewModel.updateLocationDropOffTrip(listLocationDropOff[position].location.locationId!!, listLocationDropOff[position].location.nameLocation!!)
             fragmentSelectLocationViewModel.dropoffLocation.observe(viewLifecycleOwner, {
                 binding.dropOffLocation.text = it
                 binding.dropOff.setBackgroundResource(R.drawable.boder_edittex)
