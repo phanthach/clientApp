@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.clientapp.Domain.Model.Model.Ticket
+import com.example.clientapp.Domain.Model.Model.TicketRequest
 import com.example.clientapp.Domain.Model.Request.OrderRequest
 import com.example.clientapp.Domain.UseCase.PaymentUseCase.PaymentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,9 +17,9 @@ class FragmentPayViewModel @Inject constructor(private val paymentUseCase: Payme
     private var _paymentResult= MutableLiveData<Int>()
     val paymentResult: LiveData<Int> = _paymentResult
 
-    fun submitOrder(amount: Int, orderInfo: String, tickets: List<Ticket>,ticketsReturn: List<Ticket>?, modId: Int, modIdReturn: Int, roundTrip:Int, ticketPrice:Int,ticketPriceReturn:Int) {
+    fun submitOrder(amount: Int, orderInfo: String, ticketRequests: List<TicketRequest>, ticketsReturn: List<TicketRequest>?, modId: Int, modIdReturn: Int, roundTrip:Int, ticketPrice:Int, ticketPriceReturn:Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val oderRequest = OrderRequest(tickets, ticketsReturn)
+            val oderRequest = OrderRequest(ticketRequests, ticketsReturn)
             var result = paymentUseCase.submitOrder(amount, orderInfo,oderRequest, modId,modIdReturn, roundTrip, ticketPrice,ticketPriceReturn)
             _paymentResult.postValue(result)
         }

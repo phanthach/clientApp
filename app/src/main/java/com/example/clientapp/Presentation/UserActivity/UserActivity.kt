@@ -19,6 +19,7 @@ class UserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserBinding
     // Mã yêu cầu quyền
     private val LOCATION_PERMISSION_REQUEST_CODE = 100
+    private val STORAGE_PERMISSION_REQUEST_CODE = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserBinding.inflate(layoutInflater)
@@ -27,7 +28,12 @@ class UserActivity : AppCompatActivity() {
             // Nếu chưa cấp quyền, yêu cầu quyền
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
         }
-
+        // Kiểm tra quyền đọc và ghi bộ nhớ
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Nếu chưa cấp quyền, yêu cầu quyền
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_REQUEST_CODE)
+        }
         setContentView(binding.root)
         setUpViewPager()
         setUpBottomNavigation()
@@ -37,17 +43,27 @@ class UserActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Quyền đã được cấp
-                Toast.makeText(this, "Quyền vị trí đã được cấp", Toast.LENGTH_SHORT).show()
-            } else {
-                // Quyền bị từ chối
-                Toast.makeText(this, "Quyền vị trí bị từ chối", Toast.LENGTH_SHORT).show()
+        when (requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Quyền đã được cấp
+                    Toast.makeText(this, "Quyền vị trí đã được cấp", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Quyền bị từ chối
+                    Toast.makeText(this, "Quyền vị trí bị từ chối", Toast.LENGTH_SHORT).show()
+                }
+            }
+            STORAGE_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Quyền đã được cấp
+                    Toast.makeText(this, "Quyền đọc và ghi bộ nhớ đã được cấp", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Quyền bị từ chối
+                    Toast.makeText(this, "Quyền đọc và ghi bộ nhớ bị từ chối", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
-
     private fun setUpBottomNavigation() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){

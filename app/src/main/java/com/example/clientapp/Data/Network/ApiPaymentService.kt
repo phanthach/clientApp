@@ -1,9 +1,7 @@
 package com.example.clientapp.Data.Network
 
 import com.example.clientapp.Domain.Model.Model.Payment
-import com.example.clientapp.Domain.Model.Model.Ticket
 import com.example.clientapp.Domain.Model.Request.OrderRequest
-import com.example.clientapp.Domain.Model.Response.TripResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,4 +24,20 @@ interface ApiPaymentService {
     suspend fun getPayment(@Header("Authorization") token: String,
                            @Query("paymentId") paymentId: Int): Response<Payment>
 
+    @GET("api/countPayment")
+    suspend fun countPayment(@Header("Authorization") token: String): Long
+
+    @GET("api/listPayment")
+    suspend fun listPayment(@Header("Authorization") token: String): Response<List<Payment>>
+
+    @GET("api/listPaymentGone")
+    suspend fun listPaymentGone(@Header("Authorization") token: String): Response<List<Payment>>
+
+    @GET("api/listPaymentCancel")
+    suspend fun listPaymentCancel(@Header("Authorization") token: String): Response<List<Payment>>
+
+    @GET("api/updatePaymentStatus")
+    suspend fun updatePaymentStatus(@Header("Authorization") token: String,
+                                    @Query("paymentId") paymentId: Int,
+                                    @Query("paymentStatus") status: Int): Response<Payment>
 }

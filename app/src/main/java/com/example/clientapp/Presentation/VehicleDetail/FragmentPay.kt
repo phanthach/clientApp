@@ -3,7 +3,6 @@ package com.example.clientapp.Presentation.VehicleDetail
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.example.clientapp.Domain.Model.Model.Ticket
+import com.example.clientapp.Domain.Model.Model.TicketRequest
 import com.example.clientapp.Presentation.BookTicket.BookTicketActivityViewModel
 import com.example.clientapp.Presentation.Login.LoginActivity
 import com.example.clientapp.Presentation.Main.MainActivityViewModel
@@ -109,14 +108,14 @@ class FragmentPay: Fragment() {
             binding.Price.text = price1.toString()
             binding.total.text = (bookTicketActivityViewModel.listNameSeat.value!!.size).toString()
             val oderInfo = "Thanh toan ve xe"
-            val listTickets = mutableListOf<Ticket>()
+            val listTicketRequests = mutableListOf<TicketRequest>()
             for (ticket in bookTicketActivityViewModel.listSeatID.value!!){
-                listTickets.add(Ticket(item.trip.tripId, ticket, bookTicketActivityViewModel.locationPickUpTrip.value!!, bookTicketActivityViewModel.locationDropOffTrip.value!!))
+                listTicketRequests.add(TicketRequest(item.trip.tripId, ticket, bookTicketActivityViewModel.locationPickUpTrip.value!!, bookTicketActivityViewModel.locationDropOffTrip.value!!))
             }
             binding.btnPayment.setOnClickListener {
                 binding.btnPayment.visibility = View.GONE
                 binding.progressBarBtn.visibility = View.VISIBLE
-                fragmentPayViewModel.submitOrder(price1,oderInfo,listTickets,null, item.trip.modId, -1, 1, item.trip.ticketPrice, -1)
+                fragmentPayViewModel.submitOrder(price1,oderInfo,listTicketRequests,null, item.trip.modId, -1, 1, item.trip.ticketPrice, -1)
             }
         }
         else{
@@ -144,18 +143,18 @@ class FragmentPay: Fragment() {
             binding.Price.text = price2.toString()
             binding.total.text = (bookTicketActivityViewModel.listNameSeat.value!!.size +bookTicketActivityViewModel.listNameSeatReturn.value!!.size).toString()
             val oderInfo = "Thanh toan ve xe"
-            val listTickets = mutableListOf<Ticket>()
-            val listTicketsReturn = mutableListOf<Ticket>()
+            val listTicketRequests = mutableListOf<TicketRequest>()
+            val listTicketsReturn = mutableListOf<TicketRequest>()
             for (ticket1 in bookTicketActivityViewModel.listSeatID.value!!){
-                listTickets.add(Ticket(item.trip.tripId, ticket1, bookTicketActivityViewModel.locationPickUpTrip.value!!, bookTicketActivityViewModel.locationDropOffTrip.value!!))
+                listTicketRequests.add(TicketRequest(item.trip.tripId, ticket1, bookTicketActivityViewModel.locationPickUpTrip.value!!, bookTicketActivityViewModel.locationDropOffTrip.value!!))
             }
             for (ticket2 in bookTicketActivityViewModel.listSeatIDReturn.value!!){
-                listTicketsReturn.add(Ticket(item2.trip.tripId, ticket2, bookTicketActivityViewModel.locationPickUpTripReturn.value!!, bookTicketActivityViewModel.locationDropOffTripReturn.value!!))
+                listTicketsReturn.add(TicketRequest(item2.trip.tripId, ticket2, bookTicketActivityViewModel.locationPickUpTripReturn.value!!, bookTicketActivityViewModel.locationDropOffTripReturn.value!!))
             }
             binding.btnPayment.setOnClickListener {
                 binding.btnPayment.visibility = View.GONE
                 binding.progressBarBtn.visibility = View.VISIBLE
-                fragmentPayViewModel.submitOrder(price2,oderInfo, listTickets,listTicketsReturn, item.trip.modId, item2.trip.modId, 2, item.trip.ticketPrice, item2.trip.ticketPrice)
+                fragmentPayViewModel.submitOrder(price2,oderInfo, listTicketRequests,listTicketsReturn, item.trip.modId, item2.trip.modId, 2, item.trip.ticketPrice, item2.trip.ticketPrice)
             }
         }
     }

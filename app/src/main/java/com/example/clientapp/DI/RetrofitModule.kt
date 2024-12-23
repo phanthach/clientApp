@@ -3,6 +3,7 @@ package com.example.clientapp.DI
 import com.example.clientapp.Data.Network.ApiGoongMapService
 import com.example.clientapp.Data.Network.ApiLayoutService
 import com.example.clientapp.Data.Network.ApiPaymentService
+import com.example.clientapp.Data.Network.ApiTicketService
 import com.example.clientapp.Data.Network.ApiTripService
 import com.example.clientapp.Data.Network.ApiUserService
 import dagger.Module
@@ -67,5 +68,11 @@ object RetrofitModule {
     @Singleton
     fun provideApiPaymentService(@Named("RetrofitClient") retrofit: Retrofit): ApiPaymentService {
         return retrofit.create(ApiPaymentService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiTicketService(@Named("RetrofitClient") retrofit: Retrofit): ApiTicketService {
+        return retrofit.create(ApiTicketService::class.java)
     }
 }

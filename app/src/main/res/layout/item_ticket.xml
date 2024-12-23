@@ -31,7 +31,7 @@
                 android:id="@+id/tvNameVehicle1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:hint="Thanh toán"
+                android:hint="Thọ Lam"
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:hint="Mã thanh toán: "
+                android:hint="Mã vé: "
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
@@ -92,17 +92,77 @@
                 />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ttPrice"
+            android:id="@+id/ttDiemDon1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/ttRoute"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/points"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                />
+            <TextView
+                android:id="@+id/diemDon1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Nhập điểm đón"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:paddingLeft="20dp"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ttDiemtra1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/ttDiemDon1"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/placeholder"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                />
+            <TextView
+                android:id="@+id/diemTra1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Nhập điểm trả"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:paddingLeft="20dp"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ttCancleTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/ttRoute">
+            android:layout_below="@+id/ttDiemtra1">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:hint="Tổng tiền: "
+                android:hint="Giá vé: "
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
@@ -129,56 +189,5 @@
                 android:textColor="@color/black"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ttCancleTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal"
-            android:layout_below="@+id/ttPrice">
-            <TextView
-                android:id="@+id/tvCancleTimeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:hint="Hết hạn sau: "
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:textSize="15dp"
-                android:paddingLeft="20dp"
-                android:paddingEnd="10dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:scrollHorizontally="true"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:id="@+id/tvCancleTime"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:hint="10:12 - 19/12/2024"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:textSize="15dp"
-                android:paddingLeft="20dp"
-                android:paddingEnd="10dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:scrollHorizontally="true"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@id/ttCancleTime"
-            android:text="Chờ thanh toán"
-            android:textStyle="italic"
-            android:textColor="#E45147"
-            android:gravity="end"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            />
     </RelativeLayout>
 </RelativeLayout>

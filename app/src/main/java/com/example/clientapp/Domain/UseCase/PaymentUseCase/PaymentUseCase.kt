@@ -1,7 +1,6 @@
 package com.example.clientapp.Domain.UseCase.PaymentUseCase
 
 import com.example.clientapp.Domain.Model.Model.Payment
-import com.example.clientapp.Domain.Model.Model.Ticket
 import com.example.clientapp.Domain.Model.Request.OrderRequest
 import com.example.clientapp.Domain.Repository.PaymentRepository
 import com.example.clientapp.Domain.Repository.TokenRepository
@@ -19,4 +18,25 @@ class PaymentUseCase @Inject constructor(
         val token ="Bearer " + tokenRepository.getToken()
         return paymentRepository.getPayment(token, paymentId)
     }
+    suspend fun countPayment(): Long {
+        val token ="Bearer " + tokenRepository.getToken()
+        return paymentRepository.countPayment(token)
+    }
+    suspend fun listPayment(): List<Payment> {
+        val token ="Bearer " + tokenRepository.getToken()
+        return paymentRepository.listPayment(token)
+    }
+    suspend fun listPaymentGone(): List<Payment> {
+        val token ="Bearer " + tokenRepository.getToken()
+        return paymentRepository.listPaymentGone(token)
+    }
+    suspend fun listPaymentCancel(): List<Payment> {
+        val token ="Bearer " + tokenRepository.getToken()
+        return paymentRepository.listPaymentCancel(token)
+    }
+    suspend fun updatePaymentStatus(paymentId: Int, status: Int): Payment {
+        val token ="Bearer " + tokenRepository.getToken()
+         return paymentRepository.updatePaymentStatus(token, paymentId, status)
+    }
+
 }
