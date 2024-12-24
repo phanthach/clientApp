@@ -1,17 +1,34 @@
 package com.example.clientapp.Presentation.DetailTicket
 
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.RelativeLayout
+import android.widget.ScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.clientapp.Domain.Model.Model.Ticket
+import com.example.clientapp.Domain.Service.PDFSaveService
 import com.example.clientapp.R
 import com.example.clientapp.databinding.FragmentDetailTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -35,12 +52,21 @@ class FragmentDetailTicket: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.progressBar.visibility = View.VISIBLE
+        binding.btnPrint.isEnabled = false
         getTicketDetail()
         binding.btnBack.setOnClickListener {
             activity?.onBackPressed()
         }
-    }
+        binding.btnPrint.setOnClickListener {
+            // Đảm bảo rằng dữ liệu đã được tải đầy đủ trước khi lưu
+            if (fragmentDetailTicketViewModel.ticketResponse.value?.ticket != null) {
+                saveScrollViewToPDF(binding.ttScrollView)
+            } else {
+                Toast.makeText(requireContext(), "Dữ liệu chưa sẵn sàng", Toast.LENGTH_SHORT).show()
+            }
+        }
 
+    }
     private fun getTicketDetail() {
         val ticket: Ticket = detailTicketActivityViewModel.ticket.value!!
         if(ticket.status == 2){
@@ -77,6 +103,7 @@ class FragmentDetailTicket: Fragment() {
                 val date = convertDateFormat(ticketResponse.ticket!!.bookingTime)
                 binding.tvXN.text = date
                 binding.ttScrollView.visibility = View.VISIBLE
+                binding.btnPrint.isEnabled = true
             }
         })
     }
@@ -96,4 +123,33 @@ class FragmentDetailTicket: Fragment() {
             "Ngày không hợp lệ"
         }
     }
+    private fun saveScrollViewToPDF(scrollView: ScrollView) {
+        // Tạo bitmap từ ScrollView
+        val bitmap = Bitmap.createBitmap(scrollView.width, scrollView.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        scrollView.draw(canvas)
+
+        // Lưu bitmap vào file tạm thời
+        val file = File(requireContext().cacheDir, "temp_ticket_${System.currentTimeMillis()}.png")
+        try {
+            FileOutputStream(file).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Lỗi khi lưu file tạm thời", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Gửi đường dẫn file đến Service
+        val intent = Intent(requireContext(), PDFSaveService::class.java).apply {
+            putExtra(PDFSaveService.EXTRA_FILE_PATH, file.absolutePath)
+        }
+        requireContext().startService(intent)
+
+        Toast.makeText(requireContext(), "Đang lưu PDF...", Toast.LENGTH_SHORT).show()
+    }
+
+
+
 }

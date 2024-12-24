@@ -27,9 +27,10 @@
         android:layout_above="@+id/ttButton"
         android:layout_margin="10dp"
         android:background="@drawable/boder_card"
-        android:visibility="gone"
+
         >
         <RelativeLayout
+            android:id="@+id/ttContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
@@ -60,6 +61,7 @@
                 android:layout_below="@+id/qrCode"
                 android:weightSum="10">
             <TextView
+                android:id="@+id/tvTicketCodeTitle"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="5"
