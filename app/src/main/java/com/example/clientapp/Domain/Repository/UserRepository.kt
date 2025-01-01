@@ -10,4 +10,5 @@ interface UserRepository {
     suspend fun registerUser(user: User): RegisterResponse
     suspend fun loginUser(loginRequest: LoginRequest): LoginResponse
     suspend fun validateUser(token: String): TokenRespose
+    suspend fun saveFCMToken(tokenA: String, token: String): Boolean
 }

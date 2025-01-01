@@ -8,5 +8,6 @@ data class LayoutSeat(
     val x: Int?,
     val y: Int?,
     val floor: Int?,
-    val listSeat: List<Seat>? = null
+    val listSeat: List<Seat>? = null,
+    val seatsBooked: List<Seat>? = null
 )

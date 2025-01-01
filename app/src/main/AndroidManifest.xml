@@ -52,7 +52,7 @@
             android:name=".Presentation.SelectLocation.SelectLocationActivity"
             android:exported="false" />
         <activity
-            android:name=".Presentation.DriverActivity"
+            android:name=".Presentation.DriverActivity.DriverActivity"
             android:exported="true" />
         <activity
             android:name=".Presentation.BookTicket.BookTicketActivity"
@@ -69,6 +69,13 @@
         <service
             android:name=".Domain.Service.PDFSaveService"
             android:foregroundServiceType="mediaProjection" />
+        <service
+            android:name=".Domain.Service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

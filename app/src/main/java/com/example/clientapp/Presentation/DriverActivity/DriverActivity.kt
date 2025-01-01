@@ -1,4 +1,4 @@
-package com.example.clientapp.Presentation.UserActivity
+package com.example.clientapp.Presentation.DriverActivity
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,20 +10,21 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.clientapp.R
+import com.example.clientapp.databinding.ActivityDriverBinding
 import com.example.clientapp.databinding.ActivityUserBinding
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserActivity : AppCompatActivity() {
+class DriverActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityUserBinding
+    private lateinit var binding: ActivityDriverBinding
     // Mã yêu cầu quyền
     private val LOCATION_PERMISSION_REQUEST_CODE = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUserBinding.inflate(layoutInflater)
+        binding = ActivityDriverBinding.inflate(layoutInflater)
         // Kiểm tra quyền vị trí
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Nếu chưa cấp quyền, yêu cầu quyền

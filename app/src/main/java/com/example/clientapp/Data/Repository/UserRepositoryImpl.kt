@@ -35,4 +35,13 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiUserServ
             TokenRespose(0, "Error", "Error", null)
         }
     }
+
+    override suspend fun saveFCMToken(tokenA: String, token: String): Boolean {
+        return try {
+            apiService.saveFCMToken(tokenA, token).isSuccessful
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
 }
