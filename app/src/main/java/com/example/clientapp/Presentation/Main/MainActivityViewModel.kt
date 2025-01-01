@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.clientapp.Domain.Model.Response.TokenRespose
 import com.example.clientapp.Domain.Repository.TokenRepository
 import com.example.clientapp.Domain.Repository.UserRepository
+import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -28,6 +30,23 @@ class MainActivityViewModel @Inject constructor(private val tokenRepository: Tok
                 tokenRepository.saveToken(tokenRepository.getTokenValid()!!, true)
             }
             _validateUser.postValue(response)
+        }
+    }
+    fun checkToken(){
+        val tokenFCM = tokenRepository.getFCMToken()
+        if(tokenFCM == null){
+            FirebaseMessaging.getInstance().token
+                .addOnCompleteListener { task: Task<String?> ->
+                    if (!task.isSuccessful) {
+                        return@addOnCompleteListener
+                    }
+                    val token = task.result
+                    Log.d("FCM Token", token!!)
+                    tokenRepository.saveFCMToken(token!!)
+                    viewModelScope.launch(Dispatchers.IO) {
+                        userRepository.saveFCMToken("Bearer ${tokenRepository.getTokenValid()!!}", token)
+                    }
+                }
         }
     }
 }

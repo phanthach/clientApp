@@ -9,6 +9,7 @@ class TokenRepositoryImpl @Inject constructor( private val sharedPreferences: Sh
     TokenRepository {
         companion object {
             private const val TOKEN_KEY = "tokenKey"
+            private const val FCM_TOKEN_KEY ="FCM_TOKEN"
         }
 
         private var userToken: String? = null
@@ -45,5 +46,13 @@ class TokenRepositoryImpl @Inject constructor( private val sharedPreferences: Sh
 
     override fun getTokenValid(): String? {
         return sharedPreferences.getString(TOKEN_KEY, null)
+    }
+
+    override fun saveFCMToken(token: String) {
+        sharedPreferences.edit().putString(FCM_TOKEN_KEY, token).apply()
+    }
+
+    override fun getFCMToken(): String? {
+        return sharedPreferences.getString(FCM_TOKEN_KEY, null)
     }
 }

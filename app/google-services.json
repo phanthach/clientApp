@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "1018173243386",
-    "project_id": "qlvx-project",
-    "storage_bucket": "qlvx-project.appspot.com"
+    "project_number": "491664384533",
+    "firebase_url": "https://csdl-qlvx-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "csdl-qlvx",
+    "storage_bucket": "csdl-qlvx.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1018173243386:android:ea78aab49de5827249ae43",
+        "mobilesdk_app_id": "1:491664384533:android:5ceae1c7df8c420367a41c",
         "android_client_info": {
           "package_name": "com.example.clientapp"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAXRu9zL-Dgwqfo3bmQaFqB9Af6Tz7mFUw"
+          "current_key": "AIzaSyBPQlrcKLqdSpk5r-hx-ReQb2cXUBkhclM"
         }
       ],
       "services": {

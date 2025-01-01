@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.clientapp.R
 import com.example.clientapp.databinding.ActivityUserBinding
+import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +33,6 @@ class UserActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpViewPager()
         setUpBottomNavigation()
-
     }
     // Xử lý kết quả yêu cầu quyền
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -59,10 +60,6 @@ class UserActivity : AppCompatActivity() {
                     binding.viewpager.currentItem = 1
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.scanQR -> {
-                    binding.viewpager.currentItem = 2
-                    return@setOnNavigationItemSelectedListener true
-                }
                 R.id.account -> {
                     binding.viewpager.currentItem = 3
                     return@setOnNavigationItemSelectedListener true
@@ -86,7 +83,6 @@ class UserActivity : AppCompatActivity() {
                 when(position){
                     0 -> binding.bottomNavigation.getMenu().findItem(R.id.home).setChecked(true)
                     1 -> binding.bottomNavigation.getMenu().findItem(R.id.history).setChecked(true)
-                    2 -> binding.bottomNavigation.getMenu().findItem(R.id.scanQR).setChecked(true)
                     else -> binding.bottomNavigation.getMenu().findItem(R.id.account).setChecked(true)
                 }
             }

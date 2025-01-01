@@ -1,5 +1,7 @@
 package com.example.clientapp.Domain.Model.Model
 
+import java.io.Serializable
+
 data class Payment(
 
     val paymentId: Int,
@@ -12,4 +14,4 @@ data class Payment(
     val paymentType: String,
     val paymentUrl:String?,
     val cancelTime:String
-)
+): Serializable

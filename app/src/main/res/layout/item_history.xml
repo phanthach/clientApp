@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="#E6E5E5"
     >
     <RelativeLayout
@@ -31,7 +31,7 @@
                 android:id="@+id/tvNameVehicle1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:hint="Thọ Lam"
+                android:hint="Thanh toán"
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:hint="Tuyến: "
+                android:hint="Mã thanh toán: "
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
@@ -76,52 +76,14 @@
                 android:textColor="@color/black"
                 />
             <TextView
-                android:id="@+id/tvRoute"
+                android:id="@+id/tvTransactionID"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:hint="Ha Noi - Ho Chi Minh"
+                android:hint="123456"
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
                 android:paddingLeft="20dp"
-                android:paddingEnd="10dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:scrollHorizontally="true"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ttSeat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal"
-            android:layout_below="@+id/ttRoute">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:hint="Số ghế: "
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:textSize="15dp"
-                android:paddingLeft="20dp"
-                android:paddingEnd="10dp"
-                android:background="@null"
-                android:singleLine="true"
-                android:scrollHorizontally="true"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:id="@+id/tvSeat"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:hint="A1"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:textSize="15dp"
-                android:paddingLeft="15dp"
                 android:paddingEnd="10dp"
                 android:background="@null"
                 android:singleLine="true"
@@ -136,11 +98,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/ttSeat">
+            android:layout_below="@+id/ttRoute">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:hint="Giá vé: "
+                android:hint="Tổng tiền: "
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:textSize="15dp"
@@ -167,14 +129,53 @@
                 android:textColor="@color/black"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ttCancleTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ttPrice">
+            <TextView
+                android:id="@+id/tvCancleTimeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:hint="Hết hạn sau: "
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:paddingLeft="20dp"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tvCancleTime"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="10:12 - 19/12/2024"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:textSize="15dp"
+                android:paddingLeft="20dp"
+                android:paddingEnd="10dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
         <TextView
             android:id="@+id/status"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_below="@id/ttPrice"
-            android:text="Đã thanh toán"
+            android:layout_below="@id/ttCancleTime"
+            android:text="Chờ thanh toán"
             android:textStyle="italic"
-            android:textColor="@color/colorAccent"
+            android:textColor="#E45147"
             android:gravity="end"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"

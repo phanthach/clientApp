@@ -84,6 +84,7 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:scrollHorizontally="true"
+                android:inputType="textPassword"
                 />
         </LinearLayout>
         <CheckBox

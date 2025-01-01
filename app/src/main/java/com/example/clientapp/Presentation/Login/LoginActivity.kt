@@ -5,11 +5,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.clientapp.Presentation.DriverActivity
+import com.example.clientapp.Presentation.DriverActivity.DriverActivity
 import com.example.clientapp.Presentation.UserActivity.UserActivity
 import com.example.clientapp.Presentation.Register.RegisterUserActivity
 import com.example.clientapp.Presentation.UI.Login.LoginViewModel
@@ -69,10 +68,12 @@ class LoginActivity : AppCompatActivity() {
                     loginResult.token?.let {
                         loginViewModel.saveToken(it, isRemember)}
                     if(loginResult.roleId==4){
+                        loginViewModel.checkToken()
                         val intent = Intent(this, UserActivity::class.java)
                         startActivity(intent)
                         finish()
                     }else if (loginResult.roleId==3){
+                        loginViewModel.checkToken()
                         val intent = Intent(this, DriverActivity::class.java)
                         startActivity(intent)
                         finish()

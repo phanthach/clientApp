@@ -5,4 +5,6 @@ interface TokenRepository {
     fun getToken(): String?
     fun deleteToken()
     fun getTokenValid():String?
+    fun saveFCMToken(token: String)
+    fun getFCMToken():String?
 }

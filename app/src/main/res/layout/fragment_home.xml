@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#CCE6E5E5"
+    >
         <RelativeLayout
             android:id="@+id/view1"
             android:layout_width="match_parent"
@@ -83,20 +85,20 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
                         />
+
                     <TextView
                         android:id="@+id/diemDon"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:hint="Nhập điểm đón"
-                        android:textStyle="bold"
+                        android:background="@null"
                         android:gravity="center_vertical"
-                        android:textSize="19dp"
+                        android:hint="Nhập điểm đón"
                         android:paddingLeft="20dp"
                         android:paddingEnd="10dp"
-                        android:background="@null"
-                        android:singleLine="true"
                         android:scrollHorizontally="true"
-                        />
+                        android:singleLine="true"
+                        android:textSize="19dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <TextView
                     android:id="@+id/tvTitle2"

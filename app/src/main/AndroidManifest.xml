@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Include this permission to grab user's general location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" /><!-- Tell the system this app requires OpenGL ES 2.0. -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Tell the system this app requires OpenGL ES 2.0. -->
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-
-    <meta-data
-        android:name="firebase_inapp_messaging_auto_data_collection_enabled"
-        android:value="true" />
 
     <application
         android:name=".MyApplication"
@@ -27,10 +31,14 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="ForegroundServicePermission">
+        <activity
+            android:name=".Presentation.DetailTicket.DetailTicketActivity"
+            android:exported="false" />
         <activity
             android:name=".Presentation.Main.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,16 +52,7 @@
             android:name=".Presentation.SelectLocation.SelectLocationActivity"
             android:exported="false" />
         <activity
-            android:name=".Presentation.Main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Presentation.DriverActivity"
+            android:name=".Presentation.DriverActivity.DriverActivity"
             android:exported="true" />
         <activity
             android:name=".Presentation.BookTicket.BookTicketActivity"
@@ -63,14 +62,15 @@
             android:exported="false" />
         <activity
             android:name=".Presentation.Login.LoginActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".Presentation.UserActivity.UserActivity"
             android:exported="false" />
-
         <service
-            android:name=".Service.MyFirebaseMessagingService"
-            android:enabled="true"
+            android:name=".Domain.Service.PDFSaveService"
+            android:foregroundServiceType="mediaProjection" />
+        <service
+            android:name=".Domain.Service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

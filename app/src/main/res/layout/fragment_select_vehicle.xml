@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#CCE6E5E5"
+    >
     <RelativeLayout
         android:id="@+id/filter"
         android:layout_width="match_parent"
@@ -15,7 +17,6 @@
             android:background="#286aa3"
             android:orientation="horizontal"
             android:weightSum="10">
-
             <ImageView
                 android:id="@+id/btBack"
                 android:layout_width="0dp"

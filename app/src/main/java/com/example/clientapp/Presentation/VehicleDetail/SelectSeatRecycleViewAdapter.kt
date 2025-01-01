@@ -19,7 +19,7 @@ class SelectSeatRecycleViewAdapter(
 ) : RecyclerView.Adapter<SelectSeatRecycleViewAdapter.ViewHolder>() {
     private var totalSeat = 0
     inner class ViewHolder(private val binding: ItemLayoutSeatBinding, private val itemSelectSeat: ItemSelectSeat) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(colums: Int, rows: Int,item: List<Seat>, position: Int) {
+        fun bind(colums: Int, rows: Int,item: List<Seat>,item2:List<Seat>, position: Int) {
             binding.txtFloor.text = (position+1).toString()
             binding.gridLayout.columnCount = colums
             binding.gridLayout.rowCount = rows
@@ -71,6 +71,21 @@ class SelectSeatRecycleViewAdapter(
                     }
                 }
             }
+            for (seat in item2) {
+                val imageView = ImageView(binding.root.context).apply {
+                    layoutParams = GridLayout.LayoutParams().apply {
+                        width = 0 // Let GridLayout divide width evenly
+                        height = 0 // Let GridLayout divide height evenly
+                        rowSpec = GridLayout.spec(seat.positionY-1, 1f)
+                        columnSpec = GridLayout.spec(seat.positionX-1, 1f)
+                        setMargins(8, 8, 8, 8) // Add margin around each ImageView
+                    }
+                    scaleType = ImageView.ScaleType.FIT_CENTER // Crop image to fit cell
+                    setImageResource(R.drawable.armchairfalse) // Set placeholder image
+                    tag = false
+                }
+                binding.gridLayout.addView(imageView)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -86,7 +101,8 @@ class SelectSeatRecycleViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(mListSeat == null) return
         val listSeat = mListSeat!!.listSeat!!.filter { it.floor == position+1 }
-        holder.bind(mListSeat!!.x!!, mListSeat!!.y!!,listSeat, position)
+        val seatsBooked = mListSeat!!.seatsBooked!!.filter { it.floor == position+1 }
+        holder.bind(mListSeat!!.x!!, mListSeat!!.y!!,listSeat, seatsBooked, position)
     }
     fun updateData(newList: LayoutSeat?) {
         mListSeat = newList!!

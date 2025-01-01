@@ -171,4 +171,17 @@ class FragmentHome : Fragment() {
         startActivity(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        fragmentHomeViewModel.countPayment()
+        fragmentHomeViewModel.countPayment.observe(viewLifecycleOwner,{count ->
+            if(count== null || count == 0L){
+                binding.txtNoti.visibility= View.GONE
+            }
+            else{
+                binding.tvNoti.text = "Bạn có ${count} giao dịch chờ thanh toán"
+                binding.txtNoti.visibility = View.VISIBLE
+            }
+        })
+    }
 }
