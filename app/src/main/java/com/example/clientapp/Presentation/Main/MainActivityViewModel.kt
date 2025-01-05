@@ -34,6 +34,7 @@ class MainActivityViewModel @Inject constructor(private val tokenRepository: Tok
     }
     fun checkToken(){
         val tokenFCM = tokenRepository.getFCMToken()
+        Log.d("FCM Token", tokenFCM!!)
         if(tokenFCM == null){
             FirebaseMessaging.getInstance().token
                 .addOnCompleteListener { task: Task<String?> ->

@@ -5,51 +5,58 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.clientapp.Domain.Model.Response.TripResponse
 import com.example.clientapp.Domain.UseCase.PaymentUseCase.PaymentUseCase
+import com.example.clientapp.Domain.UseCase.TripUseCase.GetTripUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeDriverViewModel @Inject constructor(private val paymentUseCase: PaymentUseCase): ViewModel() {
-    private var _pickUpPoint = MutableLiveData<String>()
-    val pickUpPoint: LiveData<String> get() = _pickUpPoint
-
-    private var _dropOffPoint = MutableLiveData<String>()
-    val dropOffPoint: LiveData<String> get() = _dropOffPoint
-
+class HomeDriverViewModel @Inject constructor(private val getTripUseCase: GetTripUseCase): ViewModel() {
     private var _departureDate = MutableLiveData<String>()
     val departureDate: LiveData<String> get() = _departureDate
 
-    private var _returnDate = MutableLiveData<String>()
-    val returnDate: LiveData<String> get() = _returnDate
+    private var _trips = MutableLiveData<TripResponse>()
+    val trips: LiveData<TripResponse> get() = _trips
 
-    private var _roundTrip = MutableLiveData<Boolean>()
-    val roundTrip: LiveData<Boolean> get() = _roundTrip
+    private var _result = MutableLiveData<String>()
+    val result: LiveData<String> get() = _result
 
-    private var _countPayment = MutableLiveData<Long>()
-    val countPayment: LiveData<Long> get() = _countPayment
-
-    fun setPickOffPoint(pickOffPoint: String){
-        _pickUpPoint.value = pickOffPoint
-    }
-    fun setDropOffPoint(dropOffPoint: String){
-        _dropOffPoint.value = dropOffPoint
-    }
     fun setDepartureDate(departureDate: String){
         _departureDate.value = departureDate
     }
-    fun setReturnDate(returnDate: String){
-        _returnDate.value = returnDate
+
+    fun getTripsDriver(page: Int, departureDate: String){
+        viewModelScope.launch(Dispatchers.IO){
+            try {
+                val response = getTripUseCase.getTripsDriver(page, departureDate)
+                withContext(Dispatchers.Main){
+                    _trips.postValue(response)
+                }
+            }catch (e: Exception){
+                withContext(Dispatchers.Main){
+                    e.printStackTrace()
+                    _trips.postValue(TripResponse(emptyList(), 0))
+                }
+            }
+        }
     }
-    fun setRoundTrip(roundTrip: Boolean){
-        _roundTrip.value = roundTrip
-    }
-    fun countPayment(){
-        viewModelScope.launch(Dispatchers.IO) {
-            var count:Long = paymentUseCase.countPayment()
-            _countPayment.postValue(count)
+    fun updateTrip(tripId: Int, status: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            try {
+                val response = getTripUseCase.updateTrip(tripId, status)
+                withContext(Dispatchers.Main){
+                    _result.postValue(response)
+                }
+            }catch (e: Exception){
+                withContext(Dispatchers.Main){
+                    e.printStackTrace()
+                    _result.postValue("error")
+                }
+            }
         }
     }
 }

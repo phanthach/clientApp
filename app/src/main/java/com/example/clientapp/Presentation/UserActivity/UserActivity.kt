@@ -3,6 +3,7 @@ package com.example.clientapp.Presentation.UserActivity
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -89,5 +90,15 @@ class UserActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(state: Int) {
             }
         })
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("UserActivity", "onRestart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("UserActivity", "onResume")
     }
 }

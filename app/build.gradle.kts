@@ -85,6 +85,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-inappmessaging-display")
     implementation("com.google.firebase:firebase-auth")
+    implementation ("com.google.firebase:firebase-database:21.0.0")
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -102,8 +103,9 @@ dependencies {
 
     implementation ("com.google.android.exoplayer:exoplayer:2.18.1")
     implementation ("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
-
-
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("com.google.zxing:core:3.4.1")
 }
 
 kapt {

@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor(
             }catch (e: Exception){
                 e.printStackTrace()
                 withContext(Dispatchers.Main){
-                    _loginResult.value = LoginResponse("An error", 0,null,null)
+                    _loginResult.value = LoginResponse("An error", 0,null,null, null, null)
                 }
             }
         }
@@ -55,6 +55,7 @@ class LoginViewModel @Inject constructor(
     }
     fun checkToken(){
         val tokenFCM = tokenRepository.getFCMToken()
+        Log.d("FCM Token", tokenFCM!!)
         if(tokenFCM == null){
             FirebaseMessaging.getInstance().token
                 .addOnCompleteListener { task: Task<String?> ->

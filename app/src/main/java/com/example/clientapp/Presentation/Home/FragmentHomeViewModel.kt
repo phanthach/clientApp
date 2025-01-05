@@ -5,14 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.clientapp.Domain.Model.Model.Trip
 import com.example.clientapp.Domain.UseCase.PaymentUseCase.PaymentUseCase
+import com.example.clientapp.Domain.UseCase.TripUseCase.GetTripUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FragmentHomeViewModel @Inject constructor(private val paymentUseCase: PaymentUseCase): ViewModel() {
+class FragmentHomeViewModel @Inject constructor(private val paymentUseCase: PaymentUseCase, private val tripUseCase: GetTripUseCase): ViewModel() {
     private var _pickUpPoint = MutableLiveData<String>()
     val pickUpPoint: LiveData<String> get() = _pickUpPoint
 
@@ -30,6 +32,9 @@ class FragmentHomeViewModel @Inject constructor(private val paymentUseCase: Paym
 
     private var _countPayment = MutableLiveData<Long>()
     val countPayment: LiveData<Long> get() = _countPayment
+
+    private var _listTrip = MutableLiveData<List<Trip>>()
+    val listTrip: LiveData<List<Trip>> get() = _listTrip
 
     fun setPickOffPoint(pickOffPoint: String){
         _pickUpPoint.value = pickOffPoint
@@ -50,6 +55,12 @@ class FragmentHomeViewModel @Inject constructor(private val paymentUseCase: Paym
         viewModelScope.launch(Dispatchers.IO) {
             var count:Long = paymentUseCase.countPayment()
             _countPayment.postValue(count)
+        }
+    }
+    fun getTrip(){
+        viewModelScope.launch(Dispatchers.IO) {
+            var listTrip = tripUseCase.getTrip()
+            _listTrip.postValue(listTrip)
         }
     }
 }

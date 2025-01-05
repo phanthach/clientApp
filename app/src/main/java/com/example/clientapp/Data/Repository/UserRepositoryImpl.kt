@@ -23,7 +23,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiUserServ
             apiService.loginUser(loginRequest).body()!!
         } catch (e: Exception) {
             e.printStackTrace()
-            LoginResponse("An error occurred", 0, null, null)
+            LoginResponse("An error occurred", 0, null, null, null, null)
         }
     }
 
@@ -32,7 +32,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiUserServ
             apiService.validateUser(token).body()!!
         } catch (e: Exception) {
             e.printStackTrace()
-            TokenRespose(0, "Error", "Error", null)
+            TokenRespose(0, "Error", "Error", null, null)
         }
     }
 

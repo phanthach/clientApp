@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
                     mainActivityViewModel.checkToken()
                     val intent = Intent(this, UserActivity::class.java)
                     intent.putExtra("user", it.fullName)
+                    intent.putExtra("userId", it.userId)
                     startActivity(intent)
                     finish()
                 }
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                     mainActivityViewModel.checkToken()
                     val intent = Intent(this, DriverActivity::class.java)
                     intent.putExtra("user", it.fullName)
+                    intent.putExtra("userId", it.userId)
                     startActivity(intent)
                     finish()
                 }

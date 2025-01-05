@@ -34,23 +34,30 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendNotification(messageBody: String) {
         // Tạo ID cho thông báo
         val notificationId = 0
+        val channelId = "default_channel"
+        val channelName = "FCM Notifications"
 
         // Cài đặt NotificationChannel cho Android 8.0 (API level 26) trở lên
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelId = "default_channel"
-            val channelName = "FCM Notifications"
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH // Ưu tiên cao
+            )
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Tạo và hiển thị thông báo
-        val notificationBuilder = NotificationCompat.Builder(this, "default_channel")
+        // Tạo thông báo với BigTextStyle để hiển thị nội dung dài
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setContentTitle("New Message")
-            .setContentText(messageBody)
+            .setContentText(messageBody) // Hiển thị ngắn gọn trên giao diện thu gọn
+            .setStyle(NotificationCompat.BigTextStyle().bigText(messageBody)) // Hiển thị đầy đủ khi mở rộng
             .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setPriority(NotificationCompat.PRIORITY_HIGH) // Ưu tiên cao
             .setAutoCancel(true)
 
+        // Hiển thị thông báo
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(notificationId, notificationBuilder.build())
     }

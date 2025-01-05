@@ -5,4 +5,5 @@ data class TokenRespose(
     val message: String,
     val fullName: String,
     val roleId: Int?,
+    val userId: Int?
 )

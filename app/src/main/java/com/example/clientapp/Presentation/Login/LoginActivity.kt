@@ -70,11 +70,15 @@ class LoginActivity : AppCompatActivity() {
                     if(loginResult.roleId==4){
                         loginViewModel.checkToken()
                         val intent = Intent(this, UserActivity::class.java)
+                        intent.putExtra("userId", loginResult.userId)
+                        intent.putExtra("userName", loginResult.fullName)
                         startActivity(intent)
                         finish()
                     }else if (loginResult.roleId==3){
                         loginViewModel.checkToken()
                         val intent = Intent(this, DriverActivity::class.java)
+                        intent.putExtra("userId", loginResult.userId)
+                        intent.putExtra("userName", loginResult.fullName)
                         startActivity(intent)
                         finish()
                     }

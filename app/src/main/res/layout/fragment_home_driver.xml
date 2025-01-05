@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#CCE6E5E5"
+    android:background="#E5E6E6"
     >
         <RelativeLayout
             android:id="@+id/view1"
@@ -96,7 +96,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/tt"
-                android:layout_margin="20sp"
+                />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
                 />
         </RelativeLayout>
     </ScrollView>

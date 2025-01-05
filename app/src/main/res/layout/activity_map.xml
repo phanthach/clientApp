@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#286aa3"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/btBack"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvSelect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:text="Xem vị trí"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mapbox_cameraBearing="0.0"
+        app:mapbox_cameraPitch="0.0"
+        app:mapbox_cameraTargetLat="21.02819540300004"
+        app:mapbox_cameraTargetLng="105.85415977800005"
+        app:mapbox_cameraZoom="5.0"
+        android:layout_below="@+id/actionBar"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filter"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/boder_view"
+        app:cardCornerRadius="10dp"
+        >
+        <ImageView
+            android:id="@+id/tracking"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/points"
+            android:layout_gravity="center"
+            />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/boder_view"
+        app:cardCornerRadius="10dp"
+        android:layout_above="@+id/filter"
+        >
+        <ImageView
+            android:id="@+id/trackingVehicle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

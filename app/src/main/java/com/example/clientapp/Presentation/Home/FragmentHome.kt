@@ -10,7 +10,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.clientapp.Domain.Model.Model.Trip
+import com.example.clientapp.Domain.Repository.ItemListener
 import com.example.clientapp.Presentation.BookTicket.BookTicketActivity
+import com.example.clientapp.Presentation.MapTripClient.MapActivity
 import com.example.clientapp.Presentation.SelectLocation.SelectLocationActivity
 import com.example.clientapp.R
 import com.example.clientapp.databinding.FragmentHomeBinding
@@ -20,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @AndroidEntryPoint
-class FragmentHome : Fragment() {
+class FragmentHome : Fragment(), ItemListener {
     private var _binding: FragmentHomeBinding? = null
     private val fragmentHomeViewModel: FragmentHomeViewModel by viewModels()
     private val binding get() = _binding!!
@@ -28,7 +32,9 @@ class FragmentHome : Fragment() {
     private val REQUEST_CODE_DIEM_DON =1000
     private val REQUEST_CODE_DIEM_DEN =1001
     private var roundTrip = false
-    private var returnDate: Long? = null  // Lưu trữ ngày về (nếu có)
+    private var returnDate: Long? = null
+    private lateinit var adapter: TrackingTripAdapter
+    private val listTrip: MutableList<Trip> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,9 +47,21 @@ class FragmentHome : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = TrackingTripAdapter(mutableListOf(), this)
+        binding.rvTracking.adapter = adapter
+        binding.rvTracking.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         btnSearchOnClick()
         btnRoundTripOnClick()
         inputLocation()
+        toTrackingMap()
+        getTrip()
+    }
+
+    private fun getTrip() {
+        fragmentHomeViewModel.getTrip()
+    }
+
+    private fun toTrackingMap() {
     }
 
     private fun inputLocation() {
@@ -173,6 +191,7 @@ class FragmentHome : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        fragmentHomeViewModel.getTrip()
         fragmentHomeViewModel.countPayment()
         fragmentHomeViewModel.countPayment.observe(viewLifecycleOwner,{count ->
             if(count== null || count == 0L){
@@ -183,5 +202,20 @@ class FragmentHome : Fragment() {
                 binding.txtNoti.visibility = View.VISIBLE
             }
         })
+        fragmentHomeViewModel.listTrip.observe(viewLifecycleOwner,{trip ->
+            listTrip.clear()
+            listTrip.addAll(trip)
+            adapter.updateList(listTrip)
+        })
+    }
+
+    override fun onItemClick(position: Int) {
+        val trip = listTrip[position]
+        val intent = Intent(context, MapActivity::class.java)
+        intent.putExtra("trip", trip)
+        startActivity(intent)
+    }
+
+    override fun onItemClickSelected(position: Int, isSelected: Boolean) {
     }
 }
